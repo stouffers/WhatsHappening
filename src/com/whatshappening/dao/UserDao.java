@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 import com.whatshappening.datamodels.User;
 import com.whatshappening.dbconn.DBConnection;
 
@@ -24,7 +23,7 @@ public class UserDao {
 	}
 	
 	public User lookupUser(int uid) throws SQLException{
-		final String query = "SELECT uid,username,password,fullname,email FROM users WHERE uid = ? ";
+		final String sql = "SELECT uid,username,fullname,email FROM users WHERE uid = ? ";
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet results = null;
@@ -33,7 +32,7 @@ public class UserDao {
 		
 		try {
 			conn = DBConnection.getConnection();
-			statement = conn.prepareStatement(query);
+			statement = conn.prepareStatement(sql);
 			statement.setInt(1, uid);
 			
 			results = statement.executeQuery();
@@ -49,7 +48,7 @@ public class UserDao {
 	}
 	
 	public User lookupUser(String username) throws SQLException{
-		final String query = "SELECT uid,username,password,fullname,email FROM users WHERE username = ? ";
+		final String sql = "SELECT uid,username,fullname,email FROM users WHERE username = ? ";
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet results = null;
@@ -58,7 +57,7 @@ public class UserDao {
 		
 		try {
 			conn = DBConnection.getConnection();
-			statement = conn.prepareStatement(query);
+			statement = conn.prepareStatement(sql);
 			statement.setString(1, username);
 			
 			results = statement.executeQuery();
@@ -78,14 +77,14 @@ public class UserDao {
 	}
 	
 	public int insertUser(User user) throws SQLException{
-		final String query = "INSERT INTO users(username,password,fullname,email) VALUES ( ?, ?, ?, ? )";
+		final String sql = "INSERT INTO users(username,password, fullname,email) VALUES ( ?, ?, ? )";
 		Connection conn = null;
 		PreparedStatement statement = null;
 		int returnCode = -1;
 		
 		try {
 			conn = DBConnection.getConnection();
-			statement = conn.prepareStatement(query);
+			statement = conn.prepareStatement(sql);
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getFullname());

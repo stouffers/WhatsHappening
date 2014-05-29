@@ -7,6 +7,7 @@ public class User {
 	private String fullname;
 	private String email;
 	
+	// for registering users
 	public User(String username, String password, String fullname,
 			String email) {
 		this.uid=-1;
@@ -16,6 +17,7 @@ public class User {
 		this.email = email;
 	}
 	
+	// for authentication
 	public User(int uid, String username, String password, String fullname,
 			String email) {
 		this.uid = uid;
@@ -25,6 +27,7 @@ public class User {
 		this.email = email;
 	}
 	
+	// for user info lookup
 	public User(int uid, String username,String fullname,
 			String email) {
 		this.uid = uid;
